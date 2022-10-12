@@ -1,0 +1,15 @@
+package com.revature.planetservice.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.revature.planetservice.repo.PlanetRepo;
+
+@RestController
+@RequestMapping("/api")
+public class PlanetController {
+
+	@Autowired
+	PlanetRepo planetRepo;
+}

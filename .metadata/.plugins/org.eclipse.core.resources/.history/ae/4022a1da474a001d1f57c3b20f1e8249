@@ -1,0 +1,23 @@
+package com.revature.planetservice.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "planet")
+public class Planet {
+	
+	private int id;
+	private String name;
+	private double mass;
+	private double oribitalRadius;
+	private boolean rings;
+
+}

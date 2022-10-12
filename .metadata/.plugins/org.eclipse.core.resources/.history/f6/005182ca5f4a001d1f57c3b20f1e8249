@@ -1,0 +1,10 @@
+package com.revature.planetservice.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.revature.planetservice.models.Planet;
+
+
+public interface PlanetRepo extends JpaRepository<Planet, Integer> {
+
+}

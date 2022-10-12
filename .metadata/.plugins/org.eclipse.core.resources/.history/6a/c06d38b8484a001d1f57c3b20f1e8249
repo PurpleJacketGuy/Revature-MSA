@@ -1,0 +1,6 @@
+package com.revature.planetservice.controller;
+
+@RestController
+public class PlanetController {
+
+}
