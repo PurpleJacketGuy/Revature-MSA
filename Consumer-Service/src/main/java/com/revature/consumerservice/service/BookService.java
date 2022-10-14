@@ -19,7 +19,7 @@ public class BookService {
 	}
 	
 	public List<Book> getBooksFromOtherService(){
-		URI uri = URI.create("http://localhost:8000/api/book");
+		URI uri = URI.create("http://localhost:9000/book-api/api/book");
 		
 		Book[] allTheBooks = this.restTemplate.getForObject(uri, Book[].class);
 		

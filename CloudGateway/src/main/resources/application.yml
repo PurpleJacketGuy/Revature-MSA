@@ -1,0 +1,31 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: Cloud-Gateway
+    
+  cloud:
+    gateway:
+      routes:
+      - id: example-route #using this to test. can change later
+        uri: https://www.google.com/
+        predicates: #Parameter to activate this route
+        - Path=/example/{segment}
+        filters: #Modify request
+        - SetPath=/
+      - id: book-route
+        uri: lb://Book-Service #Name is from the service discovery
+        predicates:
+        - Path=/book-api/**
+        filters:
+        - RewritePath=/book-api(?<segment>/?.*), $\{segment}
+      - id: Consumer-Route
+        uri: lb://consumer-service
+        predicates:
+        - Path=/front-facing/**
+        filters:
+        - RewritePath=/front-facing(?<segment>/?.*), $\{segment}
+
+
+    
