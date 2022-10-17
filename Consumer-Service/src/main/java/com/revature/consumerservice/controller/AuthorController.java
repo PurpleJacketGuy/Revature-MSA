@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.consumerservice.models.Author;
@@ -18,6 +20,11 @@ public class AuthorController {
 	@GetMapping("/author")
 	public List<Author> getAuthors(){
 		return this.authorService.getAuthorsFromOtherService();
+	}
+	
+	@PostMapping("/find-author")
+	public Author getAuthor(@RequestParam String name) {
+		return this.authorService.getAuthorFromOtherService(name);
 	}
 
 }

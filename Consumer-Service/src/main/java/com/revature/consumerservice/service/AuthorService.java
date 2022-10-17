@@ -37,4 +37,12 @@ public class AuthorService {
 		fakeAuthors.add(new Author());
 		return fakeAuthors;
 	}
+	
+	public Author getAuthorFromOtherService(String name) {
+		URI uri = URI.create("http://localhost:9000/author-api/find-author/?name=" +name);
+		
+		Author author= this.restTemplate.postForObject(uri, null, Author.class);
+		
+		return author;
+	}
 }
