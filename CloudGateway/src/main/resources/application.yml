@@ -26,6 +26,12 @@ spring:
         - Path=/front-facing/**
         filters:
         - RewritePath=/front-facing(?<segment>/?.*), $\{segment}
+      - id: author-route
+        uri: lb://Author-Service
+        predicates:
+        - Path=/author-api/**
+        filters:
+        - RewritePath=/author-api(?<segment>/?.*), $\{segment}
 
 
     

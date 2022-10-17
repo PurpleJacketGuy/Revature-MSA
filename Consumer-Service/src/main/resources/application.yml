@@ -17,3 +17,6 @@ resilience4j:
       bookSearch:
         wait-duration: 5s #This will make resilience4J to wait 5 sec
         max-attempts: 2
+      authorSearch:
+        wait-duration: 5s
+        max-attempts: 2
