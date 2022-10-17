@@ -1,0 +1,19 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
+server:
+  port: 7000
+  
+spring:
+  application:
+    name: Consumer-Service
+    
+resilience4j:
+  retry:
+    instances:
+      bookSearch:
+        wait-duration: 5s #This will make resilience4J to wait 5 sec
+        max-attempts: 2
