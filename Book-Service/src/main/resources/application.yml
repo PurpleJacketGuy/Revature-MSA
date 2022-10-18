@@ -1,6 +1,7 @@
 server:
   port: ${random.int[8000,9000]}
   
+  
 spring:
   h2:
     console: 
@@ -16,3 +17,12 @@ spring:
     defer-datasource-initialization: true
   application:
     name: Book-Service
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - prometheus
+        - info
+        - health
