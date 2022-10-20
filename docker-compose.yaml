@@ -1,0 +1,98 @@
+services: 
+  discovery:
+    image: consul:latest 
+    mem_limit: 700m 
+    ports: 
+      - 8500:8500 #This lets us access the service from the host machine 
+    networks: 
+      - solar
+  book: 
+    image: trey/book-service
+    depends_on: 
+      - consul
+      - cloud-config
+    ports: 
+      - 7700:7700
+    networks: 
+      - solar
+    restart: on-failure
+
+  author: 
+    image: trey/author-service
+    depends_on:
+      - consul
+      - cloud-config
+    networks:
+      - solar
+    restart: on-failure
+    ports: 
+      - 8070:8070
+
+  aggregator:
+    image: trey/aggregator-service
+    depends_on: 
+      - consul
+      - author
+      - book 
+      - cloud-config
+    networks:
+      - solar
+    restart: on-failure
+
+  consumer: 
+    image: trey/consumer-service
+    depends_on: 
+      - consul
+      - author
+      - book 
+      - cloud-config
+    networks:
+      - solar
+    restart: on-failure
+
+  gateway: 
+    image: trey/cloud-gateway
+    ports: 
+      - 9000:9000
+    depends_on:
+      - consul
+      - cloud-config
+    networks: 
+      - solar
+    restart: on-failure
+
+  cloud-config:
+    image: trey/cloud-config
+    depends_on: 
+      - consul 
+    networks: 
+      - solar 
+    restart: on-failure
+
+  zipkin: 
+    image: openzipkin/zipkin 
+    ports: 
+      - 9411:9411
+    networks: 
+      - solar
+
+  prom: 
+    image: prom/prometheus
+    volumes: 
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports: 
+      - 9090:9090
+    depends_on:
+    - author
+    - book
+    networks: 
+      - solar
+
+  grafana: 
+    image: grafana/grafana
+    ports: 
+      - 3000:3000
+    networks: 
+      - solar
+networks:
+  solar:

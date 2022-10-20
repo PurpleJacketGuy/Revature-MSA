@@ -1,0 +1,16 @@
+server:
+  port: 5052
+
+spring:
+  application:
+    name: Aggregator-Service
+    
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - prometheus
+        - info
+        - health
