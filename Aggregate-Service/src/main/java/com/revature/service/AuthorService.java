@@ -14,7 +14,7 @@ import com.revature.model.Book;
 @Service
 public class AuthorService {
 	
-	private String endpoint = "http://gateway:9000/author-api/";
+	private String endpoint = "http://localhost:9000/author-api/";
 	
 	private final RestTemplate restTemplate;
 	
@@ -38,7 +38,7 @@ public class AuthorService {
 			List<Book> authorBookList = new ArrayList<>();
 			for(Book b: bookList) {
 				
-				if(b.getAuthor().equals(a.getName())) {
+				if(b.getAuthor().equals(a.getAuthor())) {
 					authorBookList.add(b);
 				}
 			}

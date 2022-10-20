@@ -1,0 +1,35 @@
+global: 
+  scrape_interval: 15s #Default scraping interval, where prometheus will scrape values from its targets. 
+   
+
+scrape_configs: 
+  #We want at least one job to target itself. 
+  - job_name: 'prometheus'
+    scrape_interval: 5s 
+    static_configs: 
+      - targets: ['localhost:9090'] #this is localhost, because it is running in local host 
+
+  - job_name: 'consumer-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs: 
+      - targets: ['consumer:8020'] 
+
+  - job_name: 'aggregate-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs: 
+      - targets: ['aggregate:5052'] 
+
+  - job_name: 'author-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs: 
+      - targets: ['author:8700'] 
+
+  - job_name: 'book-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs: 
+      - targets: ['book:7700'] 
+
+  - job_name: 'gateway-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs: 
+      - targets: ['gateway:9000'] 

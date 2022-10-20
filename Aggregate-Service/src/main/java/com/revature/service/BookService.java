@@ -16,10 +16,10 @@ public class BookService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	private String endpoint = "http://gateway:9000/book-api/";
+	private String endpoint = "http://localhost:9000/book-api/";
 	
 	public List<Book> getBooksFromOtherService(){
-		URI uri = URI.create(endpoint + "book");
+		URI uri = URI.create(endpoint + "api/book");
 		
 		Book[] allTheBooks = this.restTemplate.getForObject(uri, Book[].class);
 		

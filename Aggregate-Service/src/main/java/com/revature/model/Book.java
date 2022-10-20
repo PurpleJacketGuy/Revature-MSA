@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Book {
 
 	private int id;
-	private String name;
+	private String title;
 	private String author;
 	public int getId() {
 		return id;
@@ -13,11 +13,12 @@ public class Book {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getAuthor() {
 		return author;
@@ -27,7 +28,7 @@ public class Book {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, id, name);
+		return Objects.hash(author, id, title);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -38,11 +39,11 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		return Objects.equals(author, other.author) && id == other.id && Objects.equals(name, other.name);
+		return Objects.equals(author, other.author) && id == other.id && Objects.equals(title, other.title);
 	}
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", author=" + author + "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
 	}
 	
 	
