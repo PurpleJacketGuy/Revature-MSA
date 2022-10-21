@@ -9,7 +9,7 @@ services:
   book: 
     image: trey/book-service
     depends_on: 
-      - consul
+      - discovery
       - cloud-config
     ports: 
       - 7700:7700
@@ -20,7 +20,7 @@ services:
   author: 
     image: trey/author-service
     depends_on:
-      - consul
+      - discovery
       - cloud-config
     networks:
       - solar
@@ -28,10 +28,10 @@ services:
     ports: 
       - 8070:8070
 
-  aggregator:
-    image: trey/aggregator-service
+  aggregate:
+    image: trey/aggregate-service
     depends_on: 
-      - consul
+      - discovery
       - author
       - book 
       - cloud-config
@@ -42,7 +42,7 @@ services:
   consumer: 
     image: trey/consumer-service
     depends_on: 
-      - consul
+      - discovery
       - author
       - book 
       - cloud-config
@@ -51,11 +51,11 @@ services:
     restart: on-failure
 
   gateway: 
-    image: trey/cloud-gateway
+    image: trey/cloud-config
     ports: 
       - 9000:9000
     depends_on:
-      - consul
+      - discovery
       - cloud-config
     networks: 
       - solar
@@ -64,7 +64,7 @@ services:
   cloud-config:
     image: trey/cloud-config
     depends_on: 
-      - consul 
+      - discovery 
     networks: 
       - solar 
     restart: on-failure
