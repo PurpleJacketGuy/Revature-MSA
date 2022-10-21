@@ -10,7 +10,6 @@ services:
     image: trey/book-service
     depends_on: 
       - discovery
-      - cloud-config
     ports: 
       - 7700:7700
     networks: 
@@ -21,7 +20,6 @@ services:
     image: trey/author-service
     depends_on:
       - discovery
-      - cloud-config
     networks:
       - solar
     restart: on-failure
@@ -33,8 +31,9 @@ services:
     depends_on: 
       - discovery
       - author
-      - book 
-      - cloud-config
+      - book
+    ports:
+      - 5052:5052 
     networks:
       - solar
     restart: on-failure
@@ -45,7 +44,8 @@ services:
       - discovery
       - author
       - book 
-      - cloud-config
+    ports:
+      - 7000:7000
     networks:
       - solar
     restart: on-failure
@@ -56,17 +56,8 @@ services:
       - 9000:9000
     depends_on:
       - discovery
-      - cloud-config
     networks: 
       - solar
-    restart: on-failure
-
-  cloud-config:
-    image: trey/cloud-config
-    depends_on: 
-      - discovery 
-    networks: 
-      - solar 
     restart: on-failure
 
   zipkin: 

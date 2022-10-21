@@ -38,6 +38,18 @@ spring:
         - Path=/agg/**
         filters:
         - RewritePath=/agg(?<segment>/?.*), $\{segment}
+    consul:
+      host: http://discovery
+      port: 8500
+  zipkin:
+    base-url: http://zipkin:9411/
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
     

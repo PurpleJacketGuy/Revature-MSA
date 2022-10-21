@@ -4,13 +4,16 @@ server:
 spring:
   application:
     name: Aggregator-Service
-    
-    
+  cloud:
+    consul:
+      host: http://discovery
+      port: 8500
+  zipkin:
+    base-url: http://zipkin:9411/
+
+
 management:
   endpoints:
     web:
       exposure:
-        include:
-        - prometheus
-        - info
-        - health
+        include: "*"
