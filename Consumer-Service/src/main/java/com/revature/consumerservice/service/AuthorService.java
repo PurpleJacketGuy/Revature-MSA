@@ -23,7 +23,7 @@ public class AuthorService {
 	
 	@Retry(name="authorSearch", fallbackMethod="backupPlan")
 	public List<Author> getAuthorsFromOtherService(){
-		URI uri = URI.create("http://localhost:9000/author-api/author");
+		URI uri = URI.create("http://gateway:9000/author-api/author");
 		
 		Author[] allTheAuthors = this.restTemplate.getForObject(uri, Author[].class);
 		
@@ -39,7 +39,7 @@ public class AuthorService {
 	}
 	
 	public Author getAuthorFromOtherService(String name) {
-		URI uri = URI.create("http://localhost:9000/author-api/find-author/?name=" +name);
+		URI uri = URI.create("http://gateway:9000/author-api/find-author/?name=" +name);
 		
 		Author author= this.restTemplate.postForObject(uri, null, Author.class);
 		

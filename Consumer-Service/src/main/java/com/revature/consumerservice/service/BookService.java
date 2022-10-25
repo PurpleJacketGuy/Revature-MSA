@@ -23,7 +23,7 @@ public class BookService {
 	
 	@Retry(name="bookSearch", fallbackMethod="backupPlan")
 	public List<Book> getBooksFromOtherService(){
-		URI uri = URI.create("http://localhost:9000/book-api/api/book");
+		URI uri = URI.create("http://gateway:9000/book-api/api/book");
 		
 		Book[] allTheBooks = this.restTemplate.getForObject(uri, Book[].class);
 		

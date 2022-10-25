@@ -1,5 +1,5 @@
 server:
-  port: ${random.int[6000,7000]}
+  port: 8070 #${random.int[6000,7000]}
   
 spring:
   h2:
@@ -28,6 +28,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: 
+        - prometheus
+        - info
+        - health
+        
              
            

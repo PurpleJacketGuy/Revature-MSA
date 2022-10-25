@@ -54,6 +54,8 @@ services:
     image: trey/cloud-config
     ports: 
       - 9000:9000
+    expose:
+      - 9000
     depends_on:
       - discovery
     networks: 

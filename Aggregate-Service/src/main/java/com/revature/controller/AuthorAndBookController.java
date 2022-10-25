@@ -15,7 +15,7 @@ public class AuthorAndBookController {
 	@Autowired
 	AuthorService authorService;
 	
-	@GetMapping("/authors")
+	@GetMapping("/author")
 	public List<Author> getAuthors(){
 		return this.authorService.getAuthorsFromOtherService();
 	}

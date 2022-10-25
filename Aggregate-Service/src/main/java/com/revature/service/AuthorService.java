@@ -11,10 +11,12 @@ import org.springframework.web.client.RestTemplate;
 import com.revature.model.Author;
 import com.revature.model.Book;
 
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class AuthorService {
 	
-	private String endpoint = "http://localhost:9000/author-api/";
+	private String endpoint = "http://gateway:9000/author-api/";
 	
 	private final RestTemplate restTemplate;
 	
@@ -25,6 +27,7 @@ public class AuthorService {
 		this.bookService = bookService;
 	}
 	
+	@Retry(name="authorSearch", fallbackMethod="authorBackup")
 	public List<Author> getAuthorsFromOtherService(){
 		URI uri = URI.create(endpoint + "author");
 		
@@ -46,5 +49,11 @@ public class AuthorService {
 		}
 		return authorList;
 	}
+	
+	public List<Author> authorBackup(Exception e){
+		List<Author> fakeAuthors = new ArrayList<>();
+		
+		return fakeAuthors;
+	} 
 
 }
